@@ -1,0 +1,14 @@
+1.Create Domain for cars
+
+Vehicle
+1. Brand
+1. Name
+3. Body
+4. Color
+5. Engine
+6. Series / Enum
+7. ImageLink
+8. Fuel / Enum
+9. Version / Enum
+10. Type / Enum
+11. Model

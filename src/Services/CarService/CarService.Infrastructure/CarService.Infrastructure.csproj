@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>SuperCar.CarService.Infrastructure</AssemblyName>
+    <RootNamespace>SuperCar.CarService.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+</Project>
