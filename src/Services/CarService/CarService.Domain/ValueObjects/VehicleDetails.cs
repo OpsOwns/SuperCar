@@ -1,5 +1,6 @@
 ﻿using SuperCar.CarService.Domain.Enums;
 using SuperCar.Shared.Domain.Abstraction;
+using System;
 using System.Collections.Generic;
 
 namespace SuperCar.CarService.Domain.ValueObjects
@@ -25,6 +26,10 @@ namespace SuperCar.CarService.Domain.ValueObjects
         public static VehicleDetails Create(Fuel fuel, string imageLink, Body body, int doors, int seats, bool trunk)
         {
             return new VehicleDetails(fuel, imageLink, body, doors, seats, trunk);
+        }
+        public static VehicleDetails Create(string fuel, string imageLink, string body, int doors, int seats, bool trunk)
+        {
+            return new VehicleDetails(Enum.Parse<Fuel>(fuel), imageLink, Enum.Parse<Body>(body), doors, seats, trunk);
         }
         protected override IEnumerable<object> GetEqualityComponents()
         {

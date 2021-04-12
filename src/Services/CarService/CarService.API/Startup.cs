@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SuperCar.CarService.Application;
 
 namespace SuperCar.CarService.API
 {
@@ -33,6 +34,8 @@ namespace SuperCar.CarService.API
                 config.ApiVersionReader = new MediaTypeApiVersionReader("v");
             });
             services.AddResponseCompression();
+            services.AddProblemDetails();
+            services.AddApplication();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

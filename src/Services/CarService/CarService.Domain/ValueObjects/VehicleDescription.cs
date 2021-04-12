@@ -31,6 +31,12 @@ namespace SuperCar.CarService.Domain.ValueObjects
 
             return new VehicleDescription(type, make, productionYear, color, engine, model, country);
         }
+        public static VehicleDescription Create(string type, string make, DateTime productionYear, string color, string engine,
+            string model, string country)
+        {
+            
+            return new VehicleDescription(Enum.Parse<VehicleType>(type), make, productionYear, color, engine, model, country);
+        }
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Type;

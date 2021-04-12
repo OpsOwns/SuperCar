@@ -20,5 +20,6 @@ namespace SuperCar.Shared.API.Controllers.Extensions
             await formFile.CopyToAsync(memoryStream);
             return memoryStream.ToArray();
         }
+        
     }
 }
