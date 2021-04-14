@@ -1,6 +1,8 @@
 ﻿using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using SuperCar.Shared.Domain.Abstraction;
+using SuperCar.Shared.EventStore.Database.Document;
+using SuperCar.Shared.EventStore.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -18,9 +20,9 @@ namespace SuperCar.Shared.EventStore.Database
             CancellationToken cancellationToken = default) =>
             await _container.CreateItemAsync(eventDocument, partitionKey, cancellationToken: cancellationToken);
 
-        public async Task<IEnumerable<EventDocument>> GetDocuments(Identity identity,CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<EventDocument>> Get(Identity identity,CancellationToken cancellationToken = default)
         {
-            var query = _container.GetItemLinqQueryable<EventDocument>().Where(z => z.StreamId == identity.Id.ToString());
+            var query = _container.GetItemLinqQueryable<EventDocument>().Where(z => z.StreamId == identity.Value.ToString());
             var iterator = _container.GetItemQueryIterator<EventDocument>(query.ToQueryDefinition());
             var result = new List<EventDocument>();
             while (iterator.HasMoreResults)

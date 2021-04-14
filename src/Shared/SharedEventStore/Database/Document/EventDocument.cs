@@ -1,21 +1,21 @@
 ﻿using SuperCar.Shared.Domain.Abstraction;
 using System;
 
-namespace SuperCar.Shared.EventStore.Database
+namespace SuperCar.Shared.EventStore.Database.Document
 {
     public class EventDocument : Resource
     {
-        public string StreamId { get; private set; }
-        public int Version { get; private set; }
+        public string StreamId { get;  set; }
+        public int Version { get;  set; }
         public string Payload { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
         public string AssemblyQualifiedName { get; set; }
         public EventDocument(){}
         public EventDocument(Identity streamId, int version)
         {
-            StreamId = streamId.Id.ToString();
+            StreamId = streamId.Value.ToString();
             Version = version;
-            Id = $"{streamId.Id}_{version}";
+            Id = $"{streamId.Value}_{version}";
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using SuperCar.CarService.Domain.Aggregate;
+using SuperCar.CarService.Domain.Entity;
 using SuperCar.CarService.Domain.Enums;
 using SuperCar.CarService.Domain.ValueObjects;
 using Xunit;

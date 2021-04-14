@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using SuperCar.Shared.Domain.Abstraction;
 using SuperCar.Shared.Domain.Interfaces;
-using SuperCar.Shared.EventStore.Database;
+using SuperCar.Shared.EventStore.Database.Document;
+using SuperCar.Shared.EventStore.Exception;
+using SuperCar.Shared.EventStore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,6 @@ namespace SuperCar.Shared.EventStore
             var documentEvents = events.Select(x =>
                 new EventDocument(aggregateId, version)
                 {
-                    Id = $"{aggregateId.Id}_{version}",
                     AssemblyQualifiedName = x.GetType().AssemblyQualifiedName,
                     Payload = JsonConvert.SerializeObject(x, _jsonSerializerSettings),
                     TimeStamp = x.OccurredAt,
@@ -51,7 +52,7 @@ namespace SuperCar.Shared.EventStore
             JsonConvert.DeserializeObject(eventSelected, Type.GetType(assemblyName)!) as DomainEvent;
         public async Task<IReadOnlyCollection<IDomainEvent>> Load(Identity aggregateRootId, CancellationToken cancellationToken = default)
         {
-            var result = (await _cosmosDbContext.GetDocuments(aggregateRootId, cancellationToken)).ToList();
+            var result = (await _cosmosDbContext.Get(aggregateRootId, cancellationToken)).ToList();
             return result.Count is 0 ? new List<IDomainEvent>() : result.Select(eventDocument => TransformEvent(eventDocument.Payload, eventDocument.AssemblyQualifiedName)).ToList();
         }
     }
