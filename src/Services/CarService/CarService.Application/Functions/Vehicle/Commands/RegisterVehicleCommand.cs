@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using SuperCar.CarService.Domain.ValueObjects;
+using SuperCar.Shared.EventStore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,16 +13,21 @@ namespace SuperCar.CarService.Application.Functions.Vehicle.Commands
 
     public class RegisterVehicleCommandHandler : IRequestHandler<RegisterVehicleCommand, Guid>
     {
+        private readonly IEventStore _eventStore;
+        public RegisterVehicleCommandHandler(IEventStore eventStore)
+        {
+            _eventStore = eventStore;
+        }
+
         public async Task<Guid> Handle(RegisterVehicleCommand request, CancellationToken cancellationToken)
         {
-
             var vehicle = new Domain.Aggregate.Vehicle(VehicleDescription.Create(request.VehicleType,
                     request.Make, request.ProductionYear, request.Color,
                     request.Engine, request.Model, request.Country),
                 VehicleDetails.Create(request.Fuel, request.ImageLink, request.Body, request.Doors, request.Seats,
                     request.Trunk));
-            //Push Vehicle to EventStore
-            return Guid.Empty;
+             await _eventStore.Commit(vehicle.Id, vehicle.Version, vehicle.DomainEvents, cancellationToken);
+             return vehicle.Id.Value;
         }
     }
 }

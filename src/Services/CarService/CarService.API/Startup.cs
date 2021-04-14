@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SuperCar.CarService.Application;
+using SuperCar.Shared.EventStore;
 
 namespace SuperCar.CarService.API
 {
@@ -36,6 +37,7 @@ namespace SuperCar.CarService.API
             services.AddResponseCompression();
             services.AddProblemDetails();
             services.AddApplication();
+            services.AddEventStore(Configuration, "CosmosDb");
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

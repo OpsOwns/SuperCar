@@ -7,9 +7,9 @@ namespace SuperCar.CarService.Application.Functions.Vehicle.Commands
     {
         public RegisterVehicleValidate()
         {
-            RuleFor(z => z.Body).IsEnumName(typeof(Body));
-            RuleFor(x => x.Fuel).IsEnumName(typeof(Fuel));
-            RuleFor(x => x.VehicleType).IsEnumName(typeof(VehicleType));
+            //RuleFor(z => z.Body).IsEnumName(typeof(Body));
+            //RuleFor(x => x.Fuel).IsEnumName(typeof(Fuel));
+            //RuleFor(x => x.VehicleType).IsEnumName(typeof(VehicleType));
         }
     }
 }

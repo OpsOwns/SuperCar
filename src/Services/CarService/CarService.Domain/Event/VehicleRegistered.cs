@@ -1,4 +1,5 @@
-﻿using SuperCar.CarService.Domain.Aggregate;
+﻿using Newtonsoft.Json;
+using SuperCar.CarService.Domain.Aggregate;
 using SuperCar.CarService.Domain.Enums;
 using SuperCar.CarService.Domain.ValueObjects;
 using SuperCar.Shared.Domain.Abstraction;
@@ -8,19 +9,22 @@ namespace SuperCar.CarService.Domain.Event
 {
     public class VehicleRegistered : DomainEvent
     {
-        public VehicleType Type { get; }
-        public string Make { get; }
-        public DateTime ProductionYear { get; }
-        public string Color { get; }
-        public string Engine { get; }
-        public string Model { get; }
-        public string Country { get; }
-        public Fuel Fuel { get; }
-        public string ImageLink { get; }
-        public Body Body { get; }
-        public int Doors { get; }
-        public int Seats { get; }
-        public bool Trunk { get; }
+        public VehicleType Type { get; init; }
+        public string Make { get; init; }
+        public DateTime ProductionYear { get; init; }
+        public string Color { get; init; }
+        public string Engine { get; init; }
+        public string Model { get; init; }
+        public string Country { get; init; }
+        public Fuel Fuel { get; init; }
+        public string ImageLink { get; init; }
+        public Body Body { get; init; }
+        public int Doors { get; init; }
+        public int Seats { get; init; }
+        public bool Trunk { get; init; }
+        [JsonConstructor]
+        public VehicleRegistered(string aggregateId) : base(Guid.Parse(aggregateId))
+        { }
         public VehicleRegistered(VehicleId vehicleId , VehicleDescription description, VehicleDetails details) : base(vehicleId.Id)
         {
             Type = description.Type;

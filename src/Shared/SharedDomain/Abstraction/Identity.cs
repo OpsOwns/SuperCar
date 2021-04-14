@@ -2,11 +2,11 @@
 
 namespace SuperCar.Shared.Domain.Abstraction
 {
-    public record Identity(Guid Id)
+    public record Identity(Guid Value)
     {
         public override string ToString()
         {
-            return Id.ToString();
+            return Value.ToString();
         }
     }
 }

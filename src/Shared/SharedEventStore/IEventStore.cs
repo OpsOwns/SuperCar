@@ -1,6 +1,7 @@
 ﻿using SuperCar.Shared.Domain.Abstraction;
 using SuperCar.Shared.Domain.Interfaces;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SuperCar.Shared.EventStore
@@ -9,7 +10,7 @@ namespace SuperCar.Shared.EventStore
     {
         Task Commit(Identity aggregateId,
             int version,
-            IReadOnlyCollection<IDomainEvent> events);
-        Task<IReadOnlyCollection<IDomainEvent>> Load(Identity aggregateRootId);
+            IReadOnlyCollection<IDomainEvent> events, CancellationToken cancellationToken = default);
+        Task<IReadOnlyCollection<IDomainEvent>> Load(Identity aggregateRootId, CancellationToken cancellationToken = default);
     }
 }
