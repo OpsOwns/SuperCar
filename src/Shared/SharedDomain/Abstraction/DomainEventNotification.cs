@@ -1,4 +1,5 @@
 ﻿using SuperCar.Shared.Domain.Interfaces;
+using System;
 
 namespace SuperCar.Shared.Domain.Abstraction
 {
@@ -6,5 +7,6 @@ namespace SuperCar.Shared.Domain.Abstraction
     {
         public TDomainEvent DomainEvent { get; }
         public DomainEventNotification(TDomainEvent domainEvent) => DomainEvent = domainEvent;
+        public DateTimeOffset OccurredAt { get; } = DateTimeOffset.Now;
     }
 }

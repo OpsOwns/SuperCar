@@ -8,6 +8,7 @@ namespace SuperCar.CarService.Domain.Aggregate
     {
         public VehicleDescription Description { get; private set; }
         public VehicleDetails Details { get; private set; }
+        public Vehicle() : base(new VehicleId()){}
         public Vehicle(VehicleDescription description, VehicleDetails details) : base(new VehicleId())
         {
             Description = description;

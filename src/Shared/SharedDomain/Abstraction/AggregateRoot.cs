@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SuperCar.Shared.Domain.Abstraction
 {
-    public class AggregateRoot<TId> : Entity<TId> where TId : Identity
+    public abstract class AggregateRoot<TId> : Entity<TId> where TId : Identity
     {
         public int Version { get; }
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;

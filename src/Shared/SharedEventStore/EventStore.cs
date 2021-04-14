@@ -1,21 +1,58 @@
-﻿using SuperCar.Shared.Domain.Abstraction;
+﻿using Microsoft.Azure.Cosmos;
+using Newtonsoft.Json;
+using SuperCar.Shared.Domain.Abstraction;
 using SuperCar.Shared.Domain.Interfaces;
+using SuperCar.Shared.EventStore.Database;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SuperCar.Shared.EventStore
 {
     public class EventStore : IEventStore
     {
-        public Task Commit(Identity aggregateId, int version, IReadOnlyCollection<IDomainEvent> events)
+        private readonly ICosmosDbContext _cosmosDbContext;
+        private readonly JsonSerializerSettings _jsonSerializerSettings = new()
         {
-            throw new NotImplementedException();
+            TypeNameHandling = TypeNameHandling.All,
+            NullValueHandling = NullValueHandling.Ignore
+        };
+        public EventStore(ICosmosDbContext cosmosDbContext)
+        {
+            _cosmosDbContext = cosmosDbContext;
         }
-
-        public Task<IReadOnlyCollection<IDomainEvent>> Load(Identity aggregateRootId)
+        public async Task Commit(Identity aggregateId, int version, IReadOnlyCollection<IDomainEvent> events, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var documentEvents = events.Select(x =>
+                new EventDocument(aggregateId, version)
+                {
+                    Id = $"{aggregateId.Id}_{version}",
+                    AssemblyQualifiedName = x.GetType().AssemblyQualifiedName,
+                    Payload = JsonConvert.SerializeObject(x, _jsonSerializerSettings),
+                    TimeStamp = x.OccurredAt,
+                });
+
+            foreach (var documentEvent in documentEvents)
+            {
+                try
+                {
+                    await _cosmosDbContext.Insert(documentEvent, PartitionKey.None, cancellationToken);
+                }
+                catch (CosmosException ex) when(ex.StatusCode == HttpStatusCode.Conflict)
+                {
+                    throw new ConcurrentException(aggregateId);
+                }
+            }
+        }
+        private static IDomainEvent TransformEvent(string eventSelected, string assemblyName) => 
+            JsonConvert.DeserializeObject(eventSelected, Type.GetType(assemblyName)!) as DomainEvent;
+        public async Task<IReadOnlyCollection<IDomainEvent>> Load(Identity aggregateRootId, CancellationToken cancellationToken = default)
+        {
+            var result = (await _cosmosDbContext.GetDocuments(aggregateRootId, cancellationToken)).ToList();
+            return result.Count is 0 ? new List<IDomainEvent>() : result.Select(eventDocument => TransformEvent(eventDocument.Payload, eventDocument.AssemblyQualifiedName)).ToList();
         }
     }
 }
