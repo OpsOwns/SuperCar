@@ -1,10 +1,10 @@
-﻿using SuperCar.Shared.Domain.Abstraction;
-using SuperCar.Shared.Domain.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using SuperCar.Shared.Domain.Abstraction;
+using SuperCar.Shared.Domain.Interfaces;
 
-namespace SuperCar.Shared.EventStore
+namespace SuperCar.Shared.EventStore.Interfaces
 {
     public interface IEventStore
     {

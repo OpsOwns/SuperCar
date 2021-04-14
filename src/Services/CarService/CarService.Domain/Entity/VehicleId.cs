@@ -1,7 +1,7 @@
 ﻿using SuperCar.Shared.Domain.Abstraction;
 using System;
 
-namespace SuperCar.CarService.Domain.Aggregate
+namespace SuperCar.CarService.Domain.Entity
 {
     public record VehicleId : Identity
     {

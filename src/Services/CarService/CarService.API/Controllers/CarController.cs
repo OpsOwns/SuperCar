@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SuperCar.CarService.Application.Functions.Vehicle.Commands;
 using SuperCar.Shared.API.Controllers;
+using System;
 using System.Threading.Tasks;
 
 namespace SuperCar.CarService.API.Controllers
@@ -14,6 +15,13 @@ namespace SuperCar.CarService.API.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterVehicleCommand registerCommand)
         {
             return Ok(await Mediator.Send(registerCommand));
+        }
+
+        [HttpPost("update")]
+        public async Task<IActionResult> Update(
+            [FromBody] UpdateVehicleCommand updateVehicleCommand)
+        {
+            return Ok(await Mediator.Send(updateVehicleCommand));
         }
     }
 }

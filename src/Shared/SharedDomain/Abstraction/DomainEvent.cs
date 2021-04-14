@@ -5,16 +5,24 @@ namespace SuperCar.Shared.Domain.Abstraction
 {
     public abstract class DomainEvent : IDomainEvent
     {
-        public Guid AggregateId { get; }
+        public Guid AggregateId { get; set; }
         public DateTimeOffset OccurredAt { get; } = DateTime.Now;
-        protected DomainEvent(Guid aggregateId)
+        public int Version { get;  set; }
+
+        protected DomainEvent()
+        {
+
+        }
+        protected DomainEvent(Guid aggregateId, int version)
         {
             AggregateId = aggregateId;
+            Version = version;
         }
-        protected DomainEvent(Guid aggregateId, DateTimeOffset occurredAt)
+        protected DomainEvent(Guid aggregateId, DateTimeOffset occurredAt, int version)
         {
             AggregateId = aggregateId;
             OccurredAt = occurredAt;
+            Version = version;
         }
     }
 }

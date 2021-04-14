@@ -1,4 +1,4 @@
-﻿using SuperCar.CarService.Domain.Aggregate;
+﻿using SuperCar.CarService.Domain.Entity;
 using SuperCar.CarService.Domain.Enums;
 using SuperCar.CarService.Domain.ValueObjects;
 using SuperCar.Shared.Domain.Abstraction;
@@ -7,13 +7,14 @@ namespace SuperCar.CarService.Domain.Event
 {
     public class VehicleDetailsChanged : DomainEvent
     {
-        public Fuel Fuel { get; }
-        public string ImageLink { get; }
-        public Body Body { get; }
-        public int Doors { get; }
-        public int Seats { get; }
-        public bool Trunk { get; }
-        public VehicleDetailsChanged(VehicleId vehicleId, VehicleDetails details) : base(vehicleId.Id)
+        public Fuel Fuel { get; init; }
+        public string ImageLink { get; init; }
+        public Body Body { get; init; }
+        public int Doors { get; init; }
+        public int Seats { get; init; }
+        public bool Trunk { get; init; }
+        public VehicleDetailsChanged() { }
+        public VehicleDetailsChanged(VehicleId vehicleId, VehicleDetails details, int version) : base(vehicleId.Value, version)
         {
             Fuel = details.Fuel;
             ImageLink = details.ImageLink;

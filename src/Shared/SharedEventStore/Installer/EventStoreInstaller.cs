@@ -2,8 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SuperCar.Shared.EventStore.Database;
+using SuperCar.Shared.EventStore.Interfaces;
 
-namespace SuperCar.Shared.EventStore
+namespace SuperCar.Shared.EventStore.Installer
 {
     public static class EventStoreInstaller
     {

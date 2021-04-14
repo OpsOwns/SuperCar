@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SuperCar.CarService.Application;
 using SuperCar.Shared.EventStore;
+using SuperCar.Shared.EventStore.Installer;
 
 namespace SuperCar.CarService.API
 {

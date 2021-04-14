@@ -3,7 +3,9 @@
     public abstract class Entity<TId> where TId : Identity
     {
         public TId Id { get; }
+        protected Entity(){}
         protected Entity(TId id) => Id = id;
+        public int Version { get; protected set; }
         public override bool Equals(object obj)
         {
             if (obj is not Entity<TId> other)

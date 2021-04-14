@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SuperCar.Shared.EventStore.Database
+namespace SuperCar.Shared.EventStore.Database.Document
 {
     public abstract class Resource
     {
