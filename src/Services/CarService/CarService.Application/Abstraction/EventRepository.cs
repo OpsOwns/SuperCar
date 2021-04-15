@@ -16,12 +16,12 @@ namespace SuperCar.CarService.Application.Abstraction
             _eventStore = eventStore ?? throw new ArgumentNullException(nameof(eventStore));
         }
 
-        public async Task Save(Identity identity, AggregateRoot aggregate, CancellationToken cancellationToken = default)
+        public async Task Save<T>(Identity identity, AggregateRoot<T> aggregate, CancellationToken cancellationToken = default) where  T : Identity
         {
             await _eventStore.Commit(identity, aggregate.Version, aggregate.DomainEvents, cancellationToken);
             aggregate.MarkChangesAsCommitted();
         }
-        public async Task<T> LoadAggregate<T>(Identity id, CancellationToken cancellationToken = default) where T : AggregateRoot
+        public async Task<T> LoadAggregate<T,TY>(Identity id, CancellationToken cancellationToken = default) where T : AggregateRoot<TY> where  TY: Identity
         {
             var aggregate = AggregateFactory.CreateAggregate<T>();
 

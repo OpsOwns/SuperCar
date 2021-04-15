@@ -9,7 +9,7 @@ namespace SuperCar.CarService.Application.Abstraction
         {
             try
             {
-                return  (T)Activator.CreateInstance(typeof(T));
+                return  (T)Activator.CreateInstance(typeof(T), true);
             }
             catch (MissingMethodException)
             {
