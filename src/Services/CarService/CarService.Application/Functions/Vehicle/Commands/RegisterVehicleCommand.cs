@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using SuperCar.CarService.Domain.Aggregate;
 using SuperCar.CarService.Domain.ValueObjects;
 using SuperCar.Shared.EventStore.Interfaces;
 using System;
@@ -27,8 +26,7 @@ namespace SuperCar.CarService.Application.Functions.Vehicle.Commands
                     request.Engine, request.Model, request.Country),
                 VehicleDetails.Create(request.Fuel, request.ImageLink, request.Body, request.Doors, request.Seats,
                     request.Trunk));
-            var aggregate = new VehicleAggregate(vehicle);
-             await _eventStore.Commit(vehicle.Id, vehicle.Version, aggregate.DomainEvents, cancellationToken);
+            await _eventStore.Commit(vehicle.Id, vehicle.Version, vehicle.DomainEvents, cancellationToken);
              return vehicle.Id.Value;
         }
     }

@@ -5,12 +5,14 @@ using System.Linq;
 
 namespace SuperCar.Shared.Domain.Abstraction
 {
-    public abstract class AggregateRoot
+    public abstract class AggregateRoot<T> : Entity<T> where  T: Identity
     {
         public int Version { get; protected set; }
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
         private readonly List<IDomainEvent> _domainEvents = new();
-        protected AggregateRoot() { Version = 0; }
+        protected AggregateRoot() {  }
+        protected AggregateRoot(T identity) : base(identity)
+        { }
         public void LoadFromHistory(IEnumerable<IDomainEvent> events)
         {
             var domainEvents = events as IDomainEvent[] ?? events.ToArray();
