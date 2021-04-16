@@ -13,7 +13,7 @@ namespace SuperCar.CarService.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).ConfigureLogging(((context, builder) =>
+                }).ConfigureLogging((context, builder) =>
                 {
                     builder.Configure(option =>
                     {
@@ -25,6 +25,6 @@ namespace SuperCar.CarService.API
                     builder.AddConfiguration(config);
                     builder.AddConsole();
                     builder.AddDebug();
-                }));
+                });
     }
 }

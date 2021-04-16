@@ -8,11 +8,13 @@ namespace SuperCar.Shared.Domain.Abstraction
     public abstract class AggregateRoot<T> : Entity<T> where  T: Identity
     {
         public int Version { get; protected set; }
+        public State State { get; private set; } = State.Created;
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
         private readonly List<IDomainEvent> _domainEvents = new();
         protected AggregateRoot() {  }
         protected AggregateRoot(T identity) : base(identity)
-        { }
+        {
+        }
         public void LoadFromHistory(IEnumerable<IDomainEvent> events)
         {
             var domainEvents = events as IDomainEvent[] ?? events.ToArray();
@@ -34,6 +36,10 @@ namespace SuperCar.Shared.Domain.Abstraction
         public void MarkChangesAsCommitted()
         {
             _domainEvents.Clear();
+        }
+        protected void ChangeState(State state)
+        {
+            State = state;
         }
     }
 }

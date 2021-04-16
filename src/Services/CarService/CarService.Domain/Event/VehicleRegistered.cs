@@ -1,8 +1,8 @@
-﻿using SuperCar.CarService.Domain.Entity;
-using SuperCar.CarService.Domain.Enums;
+﻿using SuperCar.CarService.Domain.Enums;
 using SuperCar.CarService.Domain.ValueObjects;
 using SuperCar.Shared.Domain.Abstraction;
 using System;
+using SuperCar.CarService.Domain.Aggregate;
 
 namespace SuperCar.CarService.Domain.Event
 {
