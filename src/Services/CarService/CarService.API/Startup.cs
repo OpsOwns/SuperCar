@@ -54,12 +54,12 @@ namespace SuperCar.CarService.API
             {
                 app.UseSwagger(x =>
                 {
-                    x.RouteTemplate = "openapi/{documentName}/openapi.json";
+                    x.RouteTemplate = "supercar/{documentName}/supercar.json";
                 });
                 app.UseSwaggerUI(c =>
                 {
-                    c.RoutePrefix = "openapi";
-                    c.SwaggerEndpoint("/openapi/v1/openapi.json", "CarService v1");
+                    c.RoutePrefix = "supercar";
+                    c.SwaggerEndpoint("/supercar/v1/supercar.json", "CarService v1");
                 });
             }
             app.UseHttpsRedirection();
