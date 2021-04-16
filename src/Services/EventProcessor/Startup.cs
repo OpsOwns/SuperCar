@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SuperCar.Shared.EventStore.Installer;
 
-namespace EventProcessor
+namespace SuperCar.EventProcessor
 {
     public class Startup
     {
@@ -37,7 +37,6 @@ namespace EventProcessor
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseHttpsRedirection();
-
         }
     }
 }

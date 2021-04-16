@@ -1,8 +1,9 @@
+using EventProcessor;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 
-namespace EventProcessor
+namespace SuperCar.EventProcessor
 {
     public static class Program
     {

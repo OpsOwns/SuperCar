@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>SuperCar.EventProcessor</AssemblyName>
+    <RootNamespace>SuperCar.EventProcessor</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\SharedEventStore\SharedEventStore.csproj" />
+    <ProjectReference Include="..\..\Shared\SharedEventStore\SharedEventStore.csproj" />
   </ItemGroup>
 
 </Project>
