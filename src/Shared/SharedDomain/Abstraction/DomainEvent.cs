@@ -12,7 +12,7 @@ namespace SuperCar.Shared.Domain.Abstraction
         protected DomainEvent(Guid aggregateId, int version)
         {
             AggregateId = aggregateId;
-            Version = version;
+            Version = ++version;
         }
     }
 }

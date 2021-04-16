@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SuperCar.CarService.API.Contract;
 using SuperCar.CarService.Application.Functions.Vehicle.Commands;
 using SuperCar.Shared.API.Controllers;
 using System;
@@ -12,16 +13,23 @@ namespace SuperCar.CarService.API.Controllers
     public class CarController : BaseController
     {
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterVehicleCommand registerCommand)
+        public async Task<IActionResult> Register([FromBody] RegisterVehicleRequest registerVehicleRequest)
         {
-            return Ok(await Mediator.Send(registerCommand));
+            return Ok(await Mediator.Send(new RegisterVehicleCommand(registerVehicleRequest.VehicleType, 
+                registerVehicleRequest.Make, registerVehicleRequest.ProductionYear, registerVehicleRequest.Color, 
+                registerVehicleRequest.Engine, registerVehicleRequest.Model, registerVehicleRequest.Country, 
+                registerVehicleRequest.Fuel, registerVehicleRequest.ImageLink, registerVehicleRequest.Body, 
+                registerVehicleRequest.Doors, registerVehicleRequest.Seats, registerVehicleRequest.Trunk)));
         }
+        [HttpPost("remove/{vehicleId}")]
+        public async Task<IActionResult> Remove([FromRoute] Guid vehicleId) =>
+            Ok(await Mediator.Send(new RemoveVehicleCommand(vehicleId)));
 
-        [HttpPost("update")]
-        public async Task<IActionResult> Update(
-            [FromBody] UpdateVehicleCommand updateVehicleCommand)
-        {
-            return Ok(await Mediator.Send(updateVehicleCommand));
-        }
+        [HttpPost("update/{vehicleId}")]
+        public async Task<IActionResult> Update([FromRoute] Guid vehicleId,
+            [FromBody] UpdateDetailsRequest updateDetailsRequest) =>
+            Ok(await Mediator.Send(new UpdateVehicleCommand(vehicleId, updateDetailsRequest.Fuel, 
+                updateDetailsRequest.ImageLink, updateDetailsRequest.Body, 
+                updateDetailsRequest.Doors, updateDetailsRequest.Seats, updateDetailsRequest.Trunk)));
     }
 }

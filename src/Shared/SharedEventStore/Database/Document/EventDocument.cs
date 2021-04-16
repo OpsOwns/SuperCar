@@ -3,7 +3,7 @@ using System;
 
 namespace SuperCar.Shared.EventStore.Database.Document
 {
-    public class EventDocument : Resource
+    public sealed class EventDocument : Resource
     {
         public string StreamId { get;  set; }
         public int Version { get;  set; }
@@ -14,7 +14,7 @@ namespace SuperCar.Shared.EventStore.Database.Document
         public EventDocument(Identity streamId, int version)
         {
             StreamId = streamId.Value.ToString();
-            Version = version;
+            Version = ++version;
             Id = $"{streamId.Value}_{version}";
         }
     }

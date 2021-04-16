@@ -1,3 +1,4 @@
+using FluentValidation;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,9 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SuperCar.CarService.API.Contract;
 using SuperCar.CarService.Application;
-using SuperCar.Shared.EventStore;
+using SuperCar.CarService.Infrastructure.Abstraction;
 using SuperCar.Shared.EventStore.Installer;
+
 
 namespace SuperCar.CarService.API
 {
@@ -36,7 +39,11 @@ namespace SuperCar.CarService.API
                 config.ApiVersionReader = new MediaTypeApiVersionReader("v");
             });
             services.AddResponseCompression();
-            services.AddProblemDetails();
+            services.AddProblemDetails(cfg =>
+            {
+                cfg.Map<NotFoundException>(x => new NotFoundProblemDetails(x));
+                cfg.Map<ValidationException>(x => new Contract.ValidationProblemDetails(x));
+            });
             services.AddApplication();
             services.AddEventStore(Configuration, "CosmosDb");
         }

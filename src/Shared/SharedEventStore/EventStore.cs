@@ -2,8 +2,8 @@
 using Newtonsoft.Json;
 using SuperCar.Shared.Domain.Abstraction;
 using SuperCar.Shared.Domain.Interfaces;
+using SuperCar.Shared.EventStore.Database;
 using SuperCar.Shared.EventStore.Database.Document;
-using SuperCar.Shared.EventStore.Exception;
 using SuperCar.Shared.EventStore.Interfaces;
 using System;
 using System.Collections.Generic;

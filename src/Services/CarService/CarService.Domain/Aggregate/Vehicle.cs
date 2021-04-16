@@ -1,9 +1,18 @@
 ﻿using SuperCar.CarService.Domain.Event;
 using SuperCar.CarService.Domain.ValueObjects;
 using SuperCar.Shared.Domain.Abstraction;
+using System;
 
-namespace SuperCar.CarService.Domain.Entity
+namespace SuperCar.CarService.Domain.Aggregate
 {
+    #region VehicleId
+    public record VehicleId : Identity
+    {
+        public VehicleId(Guid id = default) : base(id == Guid.Empty ? Guid.NewGuid() : id)
+        {
+        }
+    }
+    #endregion
     public class Vehicle : AggregateRoot<VehicleId>
     {
         public VehicleDescription Description { get; private set; }
@@ -22,6 +31,7 @@ namespace SuperCar.CarService.Domain.Entity
             Description = VehicleDescription.Create(vehicleRegistered.Type, vehicleRegistered.Make, vehicleRegistered.ProductionYear, vehicleRegistered.Color, 
                 vehicleRegistered.Engine, vehicleRegistered.Model, vehicleRegistered.Country);
             Id = new VehicleId(vehicleRegistered.AggregateId);
+            Version = vehicleRegistered.Version;
         }
         public void Apply(VehicleDetailsChanged vehicleDetailsChanged)
         {
@@ -29,9 +39,19 @@ namespace SuperCar.CarService.Domain.Entity
                 vehicleDetailsChanged.Seats,vehicleDetailsChanged.Trunk);
             Version = vehicleDetailsChanged.Version;
         }
-        public void ChangeDetails(VehicleId id, int version, VehicleDetails vehicleDetails)
+        public void Apply(VehicleRemoved vehicleRemoved)
         {
-            ApplyEvent(new VehicleDetailsChanged(id, vehicleDetails, ++version), true);
+            Version = vehicleRemoved.Version;
+            ChangeState(State.Removed);
         }
+        public void ChangeDetails(VehicleId id, VehicleDetails vehicleDetails)
+        {
+            AddEvent(new VehicleDetailsChanged(id, vehicleDetails, Version));
+        }
+        public void Remove()
+        {
+            AddEvent(new VehicleRemoved(Id, Version));
+        }
+        public bool IsRemoved() => State == State.Removed;
     }
 }

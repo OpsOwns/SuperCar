@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SuperCar.CarService.Application.Abstraction
+namespace SuperCar.CarService.Infrastructure.Abstraction
 {
     public class ParameterConstructorException : Exception
     {
