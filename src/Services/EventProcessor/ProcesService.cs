@@ -1,17 +1,16 @@
-﻿using System;
-using MassTransit;
-using Microsoft.Extensions.Hosting;
-using SuperCar.Shared.EventStore.Database.Document;
-using SuperCar.Shared.EventStore.Interfaces;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using MassTransit;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using SuperCar.Shared.EventStore.Database;
+using SuperCar.Shared.EventStore.Database.Document;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace EventProcessor
+namespace SuperCar.EventProcessor
 {
     public class ProcessService : IHostedService
     {
