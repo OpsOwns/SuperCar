@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using SuperCar.CarView.Infrastructure.DTO;
 using SuperCar.CarView.Infrastructure.Interfaces;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace SuperCar.CarView.Application.Functions.Vehicle
 {
-    public record GetVehiclesCommand : IRequest<IEnumerable<CarDto>>;
-    public class GetVehicleCommandHandler : IRequestHandler<GetVehiclesCommand, IEnumerable<CarDto>>
+    public record GetVehicleCommand(Guid VehicleId) : IRequest<CarDto>;
+    public class GetVehicleCommandHandler : IRequestHandler<GetVehicleCommand, CarDto>
     {
         private readonly IMapper _mapper;
         private readonly ICarRepository _carRepository;
@@ -18,9 +18,9 @@ namespace SuperCar.CarView.Application.Functions.Vehicle
             _carRepository = carRepository;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<CarDto>> Handle(GetVehiclesCommand request, CancellationToken cancellationToken)
+        public async Task<CarDto> Handle(GetVehicleCommand request, CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<CarDto>>(await _carRepository.GetCollection(cancellationToken));
+            return _mapper.Map<CarDto>(await _carRepository.Get(request.VehicleId, cancellationToken));
         }
     }
 }
