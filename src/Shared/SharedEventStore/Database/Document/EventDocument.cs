@@ -10,6 +10,7 @@ namespace SuperCar.Shared.EventStore.Database.Document
         public string Payload { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
         public string AssemblyQualifiedName { get; set; }
+        public string AssemblyName { get; set; }
         public EventDocument(){}
         public EventDocument(Identity streamId, int version)
         {

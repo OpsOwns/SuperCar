@@ -32,6 +32,7 @@ namespace SuperCar.Shared.EventStore
                 new EventDocument(aggregateId, version)
                 {
                     AssemblyQualifiedName = x.GetType().AssemblyQualifiedName,
+                    AssemblyName = x.GetType().Name,
                     Payload = JsonConvert.SerializeObject(x, _jsonSerializerSettings),
                     TimeStamp = x.OccurredAt,
                 });

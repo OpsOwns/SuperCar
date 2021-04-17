@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SuperCar.CarView.Infrastructure.Database.Models;
+using SuperCar.CarView.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using SuperCar.CarView.Infrastructure.Interfaces;
 
 namespace SuperCar.CarView.Infrastructure.Database
 {
@@ -28,6 +28,6 @@ namespace SuperCar.CarView.Infrastructure.Database
             await _carViewContext.SaveChangesAsync(cancellationToken);
         }
         public async Task<IEnumerable<Car>> GetCollection(CancellationToken cancellationToken = default) => await _carViewContext.Cars.ToListAsync(cancellationToken);
-        public async  Task<Car> Get(Guid id, CancellationToken cancellationToken = default) => await  _carViewContext.Cars.FindAsync(id, cancellationToken);
+        public async Task<Car> Get(Guid id, CancellationToken cancellationToken = default) => await _carViewContext.Cars.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 }

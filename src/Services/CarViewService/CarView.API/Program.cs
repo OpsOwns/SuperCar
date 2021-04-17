@@ -1,21 +1,30 @@
-using CarViewService.API;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
-namespace CarView.API
+namespace SuperCar.CarView.API
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static async Task Main(string[] args) => await CreateHostBuilder(args).Build().RunAsync();
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                }).ConfigureLogging((context, builder) =>
+                {
+                    builder.Configure(option =>
+                    {
+                        option.ActivityTrackingOptions = ActivityTrackingOptions.SpanId |
+                                                         ActivityTrackingOptions.TraceId |
+                                                         ActivityTrackingOptions.ParentId;
+                    });
+                    var config = context.Configuration.GetSection("Logging");
+                    builder.AddConfiguration(config);
+                    builder.AddConsole();
+                    builder.AddDebug();
                 });
     }
 }
