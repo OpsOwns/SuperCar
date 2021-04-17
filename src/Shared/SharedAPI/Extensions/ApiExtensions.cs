@@ -1,11 +1,11 @@
-﻿using FluentValidation;
+﻿using System;
+using System.Reflection;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SuperCar.Shared.API.SeedWork;
-using System;
-using System.Reflection;
 
-namespace SuperCar.Shared.API.Controllers.Extensions
+namespace SuperCar.Shared.API.Extensions
 {
     public static class ApiExtensions
     {

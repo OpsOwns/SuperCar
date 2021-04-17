@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SuperCar.Car.Infrastructure.Abstraction;
-using SuperCar.Shared.API.Controllers.Extensions;
 using SuperCar.Shared.Domain.Interfaces;
 using System.Reflection;
+using SuperCar.Shared.API.Extensions;
 
 namespace SuperCar.Car.Application.Installer
 {

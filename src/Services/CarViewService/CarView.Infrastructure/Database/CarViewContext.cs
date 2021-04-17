@@ -1,9 +1,9 @@
-﻿using CarView.Infrastructure.Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SuperCar.CarView.Infrastructure.Database.Configuration;
+using SuperCar.CarView.Infrastructure.Database.Models;
 using System.Reflection;
-using CarView.Infrastructure.Database.Configuration;
 
-namespace CarView.Infrastructure.Database
+namespace SuperCar.CarView.Infrastructure.Database
 {
     public class CarViewContext : DbContext
     {

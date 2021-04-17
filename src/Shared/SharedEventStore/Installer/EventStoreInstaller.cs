@@ -16,7 +16,7 @@ namespace SuperCar.Shared.EventStore.Installer
                 new CosmosClient(serviceProvider.GetService<CosmosConfiguration>()?.AccountEndpoint,
                     serviceProvider.GetService<CosmosConfiguration>()?.AccountKey));
             service.AddScoped<IEventStore, EventStore>();
-            service.AddHostedService<SeedService>();
+            service.AddHostedService<DatabaseInstaller>();
             return service;
         }
     }

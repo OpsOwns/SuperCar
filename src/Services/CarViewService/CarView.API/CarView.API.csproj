@@ -3,10 +3,15 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>SuperCar.CarView.API</AssemblyName>
+    <RootNamespace>SuperCar.CarView.API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CarView.Application\CarView.Application.csproj" />
   </ItemGroup>
 
 </Project>
