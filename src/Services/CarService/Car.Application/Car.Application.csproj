@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>SuperCar.Car.Application</AssemblyName>
+    <RootNamespace>SuperCar.Car.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\SharedAPI\Shared.API.csproj" />
+    <ProjectReference Include="..\Car.Domain\Car.Domain.csproj" />
+    <ProjectReference Include="..\Car.Infrastructure\Car.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
