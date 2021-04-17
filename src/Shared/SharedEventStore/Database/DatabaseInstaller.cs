@@ -25,7 +25,7 @@ namespace SuperCar.Shared.EventStore.Database
                 cancellationToken: cancellationToken);
             await db.Database.CreateContainerIfNotExistsAsync(configuration.ContainerId, configuration.PartitionKey,
                 cancellationToken: cancellationToken);
-            ContainerProperties containerProperties = new(configuration.LeasesId, configuration.PartitionKey);
+            ContainerProperties containerProperties = new(configuration.LeasesId, "/id");
             await db.Database.CreateContainerIfNotExistsAsync(containerProperties, cancellationToken: cancellationToken);
         }
         public async Task StopAsync(CancellationToken cancellationToken) => await Task.CompletedTask;
