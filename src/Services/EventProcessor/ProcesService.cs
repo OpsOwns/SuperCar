@@ -42,7 +42,7 @@ namespace SuperCar.EventProcessor
         private CarContract GenerateContract(EventDocument eventDocument) =>
             new()
             {
-                AssemblyQualifiedName = eventDocument.AssemblyQualifiedName, Payload = eventDocument.Payload,
+                CarEvent = Enum.Parse<CarEvents>(eventDocument.AssemblyName), Payload = eventDocument.Payload,
                 StreamId = eventDocument.StreamId
             };
         public async Task StopAsync(CancellationToken cancellationToken) => await Task.CompletedTask;

@@ -1,12 +1,17 @@
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SuperCar.CarView.Application.Installer;
 using SuperCar.CarView.Infrastructure.Installer;
+using SuperCar.CarView.Infrastructure.Projection;
 
-namespace CarView.API
+namespace SuperCar.CarView.API
 {
     public class Startup
     {
@@ -24,9 +29,34 @@ namespace CarView.API
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarViewService.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarService", Version = "v1" });
+            });
+            services.AddApiVersioning(config =>
+            {
+                config.DefaultApiVersion = new ApiVersion(1, 0);
+                config.AssumeDefaultVersionWhenUnspecified = false;
+                config.ReportApiVersions = true;
+                config.ApiVersionReader = new MediaTypeApiVersionReader("v");
             });
             services.AddInfrastructure(Configuration, "ConfigurationDatabase");
+            services.AddMassTransit(cfg =>
+            {
+                cfg.AddConsumer<Projection>();
+                cfg.UsingRabbitMq((context, configurator) =>
+                {
+                    configurator.Host("localhost", rabbitMqHostConfigurator =>
+                    {
+                        rabbitMqHostConfigurator.Username("guest");
+                        rabbitMqHostConfigurator.Password("guest");
+                    });
+                    configurator.ReceiveEndpoint("car-event", e =>
+                    {
+                        e.ConfigureConsumer<Projection>(context);
+                    });
+                });
+            });
+            services.AddMassTransitHostedService();
+            services.AddApplication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,9 +64,15 @@ namespace CarView.API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarViewService.API v1"));
+                app.UseSwagger(x =>
+                {
+                    x.RouteTemplate = "supercar/{documentName}/supercar.json";
+                });
+                app.UseSwaggerUI(c =>
+                {
+                    c.RoutePrefix = "supercar";
+                    c.SwaggerEndpoint("/supercar/v1/supercar.json", "CarService v1");
+                });
             }
 
             app.UseHttpsRedirection();
