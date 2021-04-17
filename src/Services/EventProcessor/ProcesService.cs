@@ -3,6 +3,7 @@ using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SuperCar.Contracts;
 using SuperCar.Shared.EventStore.Database;
 using SuperCar.Shared.EventStore.Database.Document;
 using System;
@@ -35,9 +36,15 @@ namespace SuperCar.EventProcessor
         {
             foreach (var eventDocument in eventDocuments)
             {
-                await _bus.Publish(eventDocument, cancellationToken);
+                await _bus.Publish(GenerateContract(eventDocument), cancellationToken);
             }
         }
+        private CarContract GenerateContract(EventDocument eventDocument) =>
+            new()
+            {
+                AssemblyQualifiedName = eventDocument.AssemblyQualifiedName, Payload = eventDocument.Payload,
+                StreamId = eventDocument.StreamId
+            };
         public async Task StopAsync(CancellationToken cancellationToken) => await Task.CompletedTask;
     }
 }

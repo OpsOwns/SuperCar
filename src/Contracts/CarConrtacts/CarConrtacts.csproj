@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>SuperCar.CarConrtacts</AssemblyName>
-    <RootNamespace>SuperCar.CarConrtacts</RootNamespace>
+    <AssemblyName>SuperCar.Contracts</AssemblyName>
+    <RootNamespace>SuperCar.Contracts</RootNamespace>
   </PropertyGroup>
 
 </Project>
