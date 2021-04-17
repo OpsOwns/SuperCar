@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CarView.Infrastructure
+namespace CarView.Application
 {
     public class Class1
     {
