@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
-namespace SuperCar.Shared.API.Controllers.Extensions
+namespace SuperCar.Shared.API.Extensions
 {
     public static class Extensions
     {

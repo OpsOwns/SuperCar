@@ -1,10 +1,10 @@
-﻿using CarView.Infrastructure.Database.Models;
+﻿using SuperCar.CarView.Infrastructure.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarView.Infrastructure.Interfaces
+namespace SuperCar.CarView.Infrastructure.Interfaces
 {
     public interface ICarRepository
     {

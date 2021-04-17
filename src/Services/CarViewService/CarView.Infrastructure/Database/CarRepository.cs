@@ -1,12 +1,12 @@
-﻿using CarView.Infrastructure.Database.Models;
-using CarView.Infrastructure.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SuperCar.CarView.Infrastructure.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using SuperCar.CarView.Infrastructure.Interfaces;
 
-namespace CarView.Infrastructure.Database
+namespace SuperCar.CarView.Infrastructure.Database
 {
     public class CarRepository : ICarRepository
     {

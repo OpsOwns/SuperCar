@@ -1,8 +1,8 @@
-﻿using CarView.Infrastructure.Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SuperCar.CarView.Infrastructure.Database.Models;
 
-namespace CarView.Infrastructure.Database.Configuration
+namespace SuperCar.CarView.Infrastructure.Database.Configuration
 {
     public class ConfigurationCar : IEntityTypeConfiguration<Car>
     {

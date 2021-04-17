@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CarView.Infrastructure.Database.Models
+namespace SuperCar.CarView.Infrastructure.Database.Models
 {
     public class Car
     {

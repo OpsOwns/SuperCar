@@ -6,4 +6,8 @@
     <RootNamespace>SuperCar.CarView.Application</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CarView.Infrastructure\CarView.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

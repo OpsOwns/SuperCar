@@ -1,18 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SuperCar.CarView.Infrastructure.Installer;
 
-namespace CarViewService.API
+namespace CarView.API
 {
     public class Startup
     {
@@ -32,6 +26,7 @@ namespace CarViewService.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarViewService.API", Version = "v1" });
             });
+            services.AddInfrastructure(Configuration, "ConfigurationDatabase");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

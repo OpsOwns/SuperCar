@@ -1,4 +1,4 @@
-﻿namespace CarView.Infrastructure.Database.Configuration
+﻿namespace SuperCar.CarView.Infrastructure.Database.Configuration
 {
     public class ConfigurationDatabase
     {

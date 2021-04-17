@@ -9,7 +9,8 @@ namespace SuperCar.Shared.EventStore.Database
         public string AccountKey { get; set; }
         public string DatabaseId { get; set; }
         public string ContainerId { get; set; }
-
+        public string LeasesId { get; set; }
+        public string PartitionKey { get; set; }
         internal CosmosConfiguration(IConfiguration configuration, string section)
         {
             if (configuration is null)
