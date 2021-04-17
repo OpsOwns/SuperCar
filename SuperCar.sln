@@ -48,6 +48,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Car.Domain.Tests", "src\Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarView.API", "src\Services\CarViewService\CarView.API\CarView.API.csproj", "{9CAB30DB-D930-4E28-83F0-EF6B0EC79F88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarView.Application", "src\Services\CarViewService\CarView.Application\CarView.Application.csproj", "{0CBC6B68-2C1B-4805-8343-1D001AFFED56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,10 @@ Global
 		{9CAB30DB-D930-4E28-83F0-EF6B0EC79F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CAB30DB-D930-4E28-83F0-EF6B0EC79F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CAB30DB-D930-4E28-83F0-EF6B0EC79F88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CBC6B68-2C1B-4805-8343-1D001AFFED56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CBC6B68-2C1B-4805-8343-1D001AFFED56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CBC6B68-2C1B-4805-8343-1D001AFFED56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CBC6B68-2C1B-4805-8343-1D001AFFED56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{280505E6-76E5-410C-A03A-7617D65CF7E3} = {EA114DD8-5632-4261-9800-B57D3B63F3B4}
 		{D2E257B9-7624-4D8F-A0AD-E54DAC28E16F} = {8D1CFB72-F8C6-45F5-81FE-6F80F412A614}
 		{9CAB30DB-D930-4E28-83F0-EF6B0EC79F88} = {4467EDDF-BF29-4EB7-9474-37994F9A6E9D}
+		{0CBC6B68-2C1B-4805-8343-1D001AFFED56} = {4467EDDF-BF29-4EB7-9474-37994F9A6E9D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBD83603-5BEF-424E-A5C3-7D66608EA8CA}
