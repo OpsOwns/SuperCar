@@ -1,7 +1,7 @@
 #sample implemention on CQRS/ES
 Project show how can be implemented event surcing with event store.
 
-##Tools
+Tools
 CosmosDB
 Sql Server
 Entity framework
