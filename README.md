@@ -1,5 +1,9 @@
 ## sample implemention on CQRS/ES and DDD
  ### implemented event surcing with event store using cosmos db for events write side and ms sql server to read side
+ ## The available services are : Cars, CarsView and EventProcessor.
+ * Cars service is resposible for saving/update cars
+ * CarsView retrive data about cars
+ * EventProcessor is resposible for push the events to the queue
 
 # Tools
 * CosmosDB
