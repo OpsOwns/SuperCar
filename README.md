@@ -1,6 +1,6 @@
-## :boom::boom::boom: sample implemention on CQRS/ES and DDD :star::star::star:
+## :boom::boom::boom: sample implemention in CQRS/ES and DDD :star::star::star:
 
- ### implemented event surcing with event store using cosmos db for events write side and ms sql server for read side
+ ### Implementation of event sourcing with event store using cosmos db for events write side and ms sql server for read. Working with Domain Driven Desgin, based on onion architecture.
  ## The available services are : Cars, CarsView and EventProcessor
  * Cars service is responsible for saving/update cars
  * CarsView retrive data about cars
