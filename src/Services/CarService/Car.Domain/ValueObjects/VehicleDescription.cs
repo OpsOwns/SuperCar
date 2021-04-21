@@ -24,7 +24,6 @@ namespace SuperCar.Car.Domain.ValueObjects
             Model = model;
             Country = country;
         }
-        //TODO Validation
         public static VehicleDescription Create(VehicleType type, string make, DateTime productionYear, string color, string engine,
             string model, string country)
         {
