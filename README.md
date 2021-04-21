@@ -2,9 +2,9 @@
 
  ### implemented event surcing with event store using cosmos db for events write side and ms sql server for read side
  ## The available services are : Cars, CarsView and EventProcessor
- * Cars service is resposible for saving/update cars
+ * Cars service is responsible for saving/update cars
  * CarsView retrive data about cars
- * EventProcessor is resposible for push the events to the queue
+ * EventProcessor is responsible for push the events to the queue
 
 # Tools
 * .NET 5
