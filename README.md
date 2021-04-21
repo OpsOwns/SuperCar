@@ -1,4 +1,4 @@
-## sample implemention on CQRS/ES and DDD
+## :boom::boom::boom: sample implemention on CQRS/ES and DDD :star::star::star:
 
  ### implemented event surcing with event store using cosmos db for events write side and ms sql server for read side
  ## The available services are : Cars, CarsView and EventProcessor
