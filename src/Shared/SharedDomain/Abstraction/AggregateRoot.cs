@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace SuperCar.Shared.Domain.Abstraction
 {
-    public abstract class AggregateRoot<T> : Entity<T> where  T: Identity
+    public abstract class AggregateRoot<T> : Entity<T> where T : Identity
     {
         public int Version { get; protected set; }
-        public State State { get; private set; } = State.Created;
+        protected State State { get; private set; } = State.Created;
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
         private readonly List<IDomainEvent> _domainEvents = new();
-        protected AggregateRoot() {  }
+        protected AggregateRoot() { }
         protected AggregateRoot(T identity) : base(identity)
         {
         }
@@ -27,7 +27,7 @@ namespace SuperCar.Shared.Domain.Abstraction
         {
             _domainEvents.Add(domainEvent);
         }
-        protected void ApplyEvent(IDomainEvent domainEvent, bool isNew)
+        private void ApplyEvent(IDomainEvent domainEvent, bool isNew)
         {
             this.AsDynamic().Apply(domainEvent);
             if (isNew)

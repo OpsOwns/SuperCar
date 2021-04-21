@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SuperCar.CarView.Infrastructure.Projection
 {
-    public class Projection : IConsumer<CarContract>
+    public abstract class Projection : IConsumer<CarContract>
     {
         private readonly ICarRepository _carRepository;
         private readonly IMapper _mapper;

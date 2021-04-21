@@ -1,10 +1,10 @@
-﻿using System;
+﻿using SuperCar.Shared.Domain.Abstraction;
+using SuperCar.Shared.Domain.Interfaces;
+using SuperCar.Shared.EventStore.Interfaces;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using SuperCar.Shared.Domain.Abstraction;
-using SuperCar.Shared.Domain.Interfaces;
-using SuperCar.Shared.EventStore.Interfaces;
 
 namespace SuperCar.Car.Infrastructure.Abstraction
 {
@@ -17,7 +17,7 @@ namespace SuperCar.Car.Infrastructure.Abstraction
             await _eventStore.Commit(identity, aggregate.Version, aggregate.DomainEvents, cancellationToken);
             aggregate.MarkChangesAsCommitted();
         }
-        public async Task<T> LoadAggregate<T,TY>(Identity id, CancellationToken cancellationToken = default) where T : AggregateRoot<TY> where  TY: Identity
+        public async Task<T> LoadAggregate<T, TIdenity>(Identity id, CancellationToken cancellationToken = default) where T : AggregateRoot<TIdenity> where TIdenity : Identity
         {
             var aggregate = AggregateFactory.CreateAggregate<T>();
             var events = await _eventStore.Load(id, cancellationToken);
